@@ -1,0 +1,100 @@
+<div class="restaurantes, contenidoDePagina">
+  <h2>Administración de Zonas</h2>
+
+  <div class="form-toggle">
+    <button class="btn primary" (click)="abrirformulario()">Agregar zona</button>
+  </div>
+  <div class="formulario_div">
+    <form *ngIf="mostrarformulario" (ngSubmit)="guardar()" class="rest-form">
+      <input type="text" [(ngModel)]="modelo.nombre" name="nombre" placeholder="Nombre" required />
+
+      <select [(ngModel)]="modelo.restaurante_id" name="restaurante">
+        <option [ngValue]="undefined">-- seleccionar restaurante --</option>
+        <option *ngFor="let r of listarestaurantes" [ngValue]="r.id">{{ r.nombre }}</option>
+      </select>
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">{{ modelo.id ? 'Guardar' : 'Agregar' }}</button>
+        <button type="button" class="btn" (click)="cerrarformulario()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <h3>Listado de zonas</h3>
+  <table class="mat-elevation-z8 list-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Restaurante</th>
+        <th>Horarios</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let z of zonas">
+        <td>{{ z.id }}</td>
+        <td>{{ z.nombre }}</td>
+        <td>{{ obtener_nombre_restaurante(z.restaurante_id) }}</td>
+        <td>
+          <button (click)="abrirhorarios(z)" class="icon-btn" aria-label="Horarios">🕒</button>
+        </td>
+        <td>
+          <button (click)="editar(z)" class="icon-btn" aria-label="Editar">✏️</button>
+        </td>
+        <td>
+          <button (click)="eliminar(z.id)" class="icon-btn warn" aria-label="Eliminar">🗑️</button>
+        </td>
+      </tr>
+      <tr *ngIf="zonas.length === 0">
+        <td colspan="5" class="empty">No hay zonas aún.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Panel de horarios por zona -->
+  <div *ngIf="mostrarhorarios" class="formulario_div, horariosPanel">
+    <h3>Horarios de la zona: {{ obtener_nombre_zona(zonaseleccionada) }}</h3>
+    <form (ngSubmit)="guardarhorario()" class="rest-form">
+      <input
+        type="number"
+        min="0"
+        max="23"
+        [(ngModel)]="modelohorario.hora"
+        name="hora"
+        placeholder="Hora (0-23)"
+        required
+      />
+      <div class="form-actions">
+        <button type="button" class="btn primary" (click)="guardarhorario()">
+          {{ modelohorario.id ? 'Guardar' : 'Agregar' }}
+        </button>
+        <button type="button" class="btn" (click)="cargarhorarios()">Cancelar</button>
+        <button type="button" class="btn" (click)="cerrarhorarios()">Cerrar</button>
+      </div>
+    </form>
+
+    <table class="mat-elevation-z8 list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Hora</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of horarios">
+          <td>{{ h.id }}</td>
+          <td>{{ h.hora }}</td>
+          <td><button (click)="editarhorario(h)" class="icon-btn">✏️</button></td>
+          <td><button (click)="eliminarhorario(h.id)" class="icon-btn warn">🗑️</button></td>
+        </tr>
+        <tr *ngIf="horarios.length === 0">
+          <td colspan="4" class="empty">No hay horarios configurados para esta zona.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

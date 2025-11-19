@@ -1,0 +1,68 @@
+<div class="crearReserva">
+  <h2>Nueva Reserva</h2>
+
+  <div class="fila">
+    <label>Seleccione Restaurante</label>
+    <select
+      [(ngModel)]="datos_formulario.restaurante_seleccionado"
+      (change)="cuando_selecciona_restaurante()"
+    >
+      <option [ngValue]="null">-- Elegir restaurante --</option>
+      <option *ngFor="let r of listado_restaurantes" [value]="r.id">{{ r.nombre }}</option>
+    </select>
+  </div>
+
+  <div class="fila">
+    <label>Seleccione Zona</label>
+    <select [(ngModel)]="datos_formulario.zona_seleccionada" (change)="cuando_selecciona_zona()">
+      <option [ngValue]="null">-- Elegir zona --</option>
+      <option *ngFor="let z of listado_zonas" [value]="z.id">{{ z.nombre }}</option>
+    </select>
+  </div>
+
+  <div class="fila">
+    <label>Fecha de Reserva</label>
+    <input
+      type="date"
+      [(ngModel)]="datos_formulario.fecha_reserva"
+      [min]="fecha_minima_permitida"
+    />
+  </div>
+
+  <div class="fila">
+    <label>Horario Disponible</label>
+    <select [(ngModel)]="datos_formulario.hora_seleccionada">
+      <option [ngValue]="null">-- Elegir horario --</option>
+      <option *ngFor="let h of horarios_disponibles" [value]="h.hora">{{ h.hora }}</option>
+    </select>
+  </div>
+
+  <div class="fila">
+    <label>Cantidad de Personas</label>
+    <input type="number" min="1" [(ngModel)]="datos_formulario.personas_cantidad" />
+  </div>
+
+  <hr />
+
+  <div class="fila">
+    <label>Nombre del Cliente</label>
+    <input type="text" [(ngModel)]="datos_formulario.cliente_nombre" />
+  </div>
+
+  <div class="fila">
+    <label>Apellido del Cliente</label>
+    <input type="text" [(ngModel)]="datos_formulario.cliente_apellido" />
+  </div>
+
+  <div class="fila">
+    <label>Teléfono de Contacto</label>
+    <input type="text" [(ngModel)]="datos_formulario.cliente_telefono" />
+  </div>
+
+  <div class="acciones">
+    <button class="btn primary" type="button" (click)="procesar_confirmacion()">
+      Confirmar Reserva
+    </button>
+    <a class="btn" routerLink="/reservas">Cancelar</a>
+  </div>
+</div>

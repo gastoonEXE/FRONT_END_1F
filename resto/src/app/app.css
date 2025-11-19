@@ -1,0 +1,12 @@
+.app-shell {
+  background: transparent;
+  min-height: 100vh;
+  padding-top: var(--navbar-height); /* evita que el contenido quede bajo el navbar */
+}
+.app-main {
+  padding-top: 0.25rem;
+}
+.app-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}

@@ -1,0 +1,74 @@
+<div class="restaurantes, contenidoDePagina">
+  <h2>Gestión de Reservas</h2>
+
+  <div class="form-toggle">
+    <a class="btn primary" routerLink="/reservas/crear">Nueva Reserva</a>
+  </div>
+
+  <div class="seccion_filtros">
+    <h3>Filtrar Reservas</h3>
+    <div class="contenedor_filtros">
+      <div class="campo_filtro">
+        <label>Restaurante</label>
+        <select [(ngModel)]="filtro_restaurante" (change)="cuando_cambia_filtro_restaurante()">
+          <option [ngValue]="null">-- Todos --</option>
+          <option *ngFor="let r of lista_restaurantes" [ngValue]="r.id">{{ r.nombre }}</option>
+        </select>
+      </div>
+
+      <div class="campo_filtro">
+        <label>Zona</label>
+        <select [(ngModel)]="filtro_zona" (change)="ejecutar_filtros()">
+          <option [ngValue]="null">-- Todas --</option>
+          <option *ngFor="let z of zonas_para_filtro" [ngValue]="z.id">{{ z.nombre }}</option>
+        </select>
+      </div>
+
+      <div class="campo_filtro">
+        <label>Fecha</label>
+        <input type="date" [(ngModel)]="filtro_fecha" (change)="ejecutar_filtros()" />
+      </div>
+
+      <div class="acciones_filtros">
+        <button class="btn" (click)="limpiar_filtros()">Limpiar Filtros</button>
+      </div>
+    </div>
+  </div>
+
+  <h3>Listado de Reservas</h3>
+  <table class="mat-elevation-z8 list-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Personas</th>
+        <th>Mesa</th>
+        <th>Zona</th>
+        <th>Cliente</th>
+        <th>Teléfono</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of reservas_filtradas">
+        <td>{{ r.id }}</td>
+        <td>{{ r.fecha }}</td>
+        <td>{{ r.hora }}</td>
+        <td>{{ r.cantidadPersonas }}</td>
+        <td>{{ obtener_numero_mesa(r.idMesaAsignada) }}</td>
+        <td>{{ obtener_nombre_zona(obtener_zona_por_mesa(r.idMesaAsignada) || 0) }}</td>
+        <td>{{ r.nombre }} {{ r.apellido }}</td>
+        <td>{{ r.telefono }}</td>
+        <td>
+          <button (click)="borrar_reserva(r.id)" class="icon-btn warn" aria-label="Eliminar">
+            🗑️
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="reservas_filtradas.length === 0">
+        <td colspan="9" class="empty">No se encontraron reservas con los filtros aplicados.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

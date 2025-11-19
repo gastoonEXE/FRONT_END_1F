@@ -1,0 +1,70 @@
+.crearReserva {
+  max-width: 720px;
+  margin: 24px auto;
+  padding: 28px;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.crearReserva h2 {
+  margin-bottom: 24px;
+  color: #2c3e50;
+  font-size: 24px;
+}
+.fila {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 16px 0;
+}
+.fila label {
+  font-weight: 600;
+  color: #34495e;
+  font-size: 14px;
+}
+.fila input,
+.fila select {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  transition: border-color 0.2s;
+}
+.fila input:focus,
+.fila select:focus {
+  outline: none;
+  border-color: #0b5fff;
+}
+.acciones {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+.btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.2s;
+}
+.btn:hover {
+  background: #e5e7eb;
+}
+.btn.primary {
+  background: #0b5fff;
+  color: #fff;
+  border-color: #0b5fff;
+}
+.btn.primary:hover {
+  background: #0847cc;
+  border-color: #0847cc;
+}
+hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 20px 0;
+}

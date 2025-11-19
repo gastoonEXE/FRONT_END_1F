@@ -1,0 +1,29 @@
+<h1>BIENVENIDO A RESTO!</h1>
+<header class="navbar">
+  <div class="navbar-inner">
+    <div class="brand" title="Inicio">
+      <span class="brand-emoji" aria-hidden="true">🍽️</span>
+      <span>Resto</span>
+    </div>
+
+    <!-- checkbox toggle for mobile -->
+    <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true" />
+
+    <!-- hamburger button (visual) -->
+    <label for="nav-toggle" class="nav-btn" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <a [routerLink]="['']">Home</a>
+      <a [routerLink]="['restaurantes']">Restaurantes</a>
+      <a [routerLink]="['zonas']">Zonas</a>
+      <a [routerLink]="['mesas']">Mesas</a>
+      <a [routerLink]="['reservas']">Reservas</a>
+    </nav>
+  </div>
+</header>
+
+<router-outlet />

@@ -1,0 +1,80 @@
+<div class="restaurantes, contenidoDePagina">
+  <h2>Administración de Mesas</h2>
+
+  <div class="form-toggle">
+    <button class="btn primary" (click)="abrirformulario()">Agregar mesa</button>
+  </div>
+
+  <div class="formulario_div">
+    <form *ngIf="mostrarformulario" (ngSubmit)="guardar()" class="rest-form">
+      <input
+        type="number"
+        [(ngModel)]="modelo.numero"
+        name="numero"
+        placeholder="Número de mesa"
+        required
+      />
+      <input
+        type="number"
+        [(ngModel)]="modelo.capacidad"
+        name="capacidad"
+        placeholder="Capacidad"
+        required
+      />
+
+      <select
+        [(ngModel)]="seleccionrestaurante"
+        name="restaurante"
+        (ngModelChange)="modelo.zona_id = undefined"
+      >
+        <option [ngValue]="undefined">-- seleccionar restaurante --</option>
+        <option *ngFor="let r of listarestaurantes" [ngValue]="r.id">{{ r.nombre }}</option>
+      </select>
+
+      <select [(ngModel)]="modelo.zona_id" name="zona">
+        <option [ngValue]="undefined">-- seleccionar zona --</option>
+        <option *ngFor="let z of zonas_por_restaurante(seleccionrestaurante)" [ngValue]="z.id">
+          {{ z.nombre }}
+        </option>
+      </select>
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">{{ modelo.id ? 'Guardar' : 'Agregar' }}</button>
+        <button type="button" class="btn" (click)="cerrarformulario()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <h3>Listado de mesas</h3>
+  <table class="mat-elevation-z8 list-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Número</th>
+        <th>Capacidad</th>
+        <th>Restaurante</th>
+        <th>Zona</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of mesas">
+        <td>{{ m.id }}</td>
+        <td>{{ m.numero }}</td>
+        <td>{{ m.capacidad }}</td>
+        <td>{{ obtener_nombre_restaurante_por_zona(m.zona_id) }}</td>
+        <td>{{ obtener_nombre_zona(m.zona_id) }}</td>
+        <td>
+          <button (click)="editar(m)" class="icon-btn" aria-label="Editar">✏️</button>
+        </td>
+        <td>
+          <button (click)="eliminar(m.id)" class="icon-btn warn" aria-label="Eliminar">🗑️</button>
+        </td>
+      </tr>
+      <tr *ngIf="mesas.length === 0">
+        <td colspan="7" class="empty">No hay mesas aún.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

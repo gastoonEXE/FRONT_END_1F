@@ -1,0 +1,43 @@
+<div class="restaurantes, contenidoDePagina">
+  <h2>Administración de Restaurantes</h2>
+  <div class="form-toggle">
+    <button class="btn primary" (click)="abrirformulario()">Agregar restaurante</button>
+  </div>
+
+  <div class="formulario_div">
+    <form *ngIf="mostrarformulario" (ngSubmit)="guardar()" class="rest-form">
+      <input type="text" [(ngModel)]="modelo.nombre" name="nombre" placeholder="Nombre" required />
+      <div class="form-actions">
+        <button type="submit" class="btn primary">{{ modelo.id ? 'Guardar' : 'Agregar' }}</button>
+        <button type="button" class="btn" (click)="cerrarformulario()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <h3>Listado de restaurantes</h3>
+  <table class="mat-elevation-z8 list-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of restaurantes">
+        <td>{{ r.id }}</td>
+        <td>{{ r.nombre }}</td>
+        <td>
+          <button (click)="editar(r)" class="icon-btn" aria-label="Editar">✏️</button>
+        </td>
+        <td>
+          <button (click)="eliminar(r.id)" class="icon-btn warn" aria-label="Eliminar">🗑️</button>
+        </td>
+      </tr>
+      <tr *ngIf="restaurantes.length === 0">
+        <td colspan="4" class="empty">No hay restaurantes aún.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

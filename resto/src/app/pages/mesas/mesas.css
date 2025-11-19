@@ -1,0 +1,70 @@
+.formulario_div {
+  margin-top: 16px;
+}
+
+.rest-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.rest-form input[type='text'],
+.rest-form input[type='number'] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.form-actions {
+  display: flex;
+  gap: 8px;
+}
+.btn {
+  padding: 8px 12px;
+  border: 1px solid #bbb;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn.primary {
+  background: #1976d2;
+  color: white;
+  border-color: #135ea8;
+}
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.list-table thead th {
+  text-align: left;
+  padding: 12px 8px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 600;
+}
+.list-table tbody td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+}
+.list-table tbody tr:hover {
+  background: #fafafa;
+}
+.mat-elevation-z8 {
+  box-shadow: 0 8px 17px -6px rgba(0, 0, 0, 0.2), 0 5px 10px -6px rgba(0, 0, 0, 0.14);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+.icon-btn.warn {
+  color: #d32f2f;
+}
+.empty {
+  text-align: center;
+  padding: 16px;
+  color: #666;
+}
