@@ -35,7 +35,7 @@ jobs:
     - run: npm run build --if-present
     - name: Show success message
       run: echo "Build finalizado con éxito."
-      
+
   imprimir-datos:
     runs-on: ubuntu-latest
     steps:
@@ -48,3 +48,24 @@ jobs:
       - name: Solo se ejecuta si estamos en la rama principal
         if: github.ref_name == 'main'
         run: echo "¡Alerta! Ejecutando un cambio crítico en la rama principal."
+
+# TAREA 1: Corre siempre para verificar que el código no tenga errores
+  ejecutar-pruebas:
+    runs-on: ubuntu-latest
+    needs: imprimir-datos # Espera a que se impriman los datos antes de correr las pruebas
+    steps:
+      - uses: actions/checkout@v5.0.0
+      - name: Correr Tests
+        run: echo "Pasando pruebas unitarias obligatorias..."
+
+  # TAREA 2: SOLO corre si los cambios se subieron a la rama 'main'
+  desplegar-produccion:
+    runs-on: ubuntu-latest
+    needs: ejecutar-pruebas # Espera a que las pruebas pasen primero
+    
+    # AQUÍ ESTÁ EL CONDICIONAL DE RAMA:
+    if: github.ref_name == 'main'
+    
+    steps:
+      - name: Desplegar App
+        run: echo "🚀 Desplegando en los servidores de producción porque estamos en MAIN!"
