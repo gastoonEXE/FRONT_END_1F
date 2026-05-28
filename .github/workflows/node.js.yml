@@ -35,3 +35,16 @@ jobs:
     - run: npm run build --if-present
     - name: Show success message
       run: echo "Build finalizado con éxito."
+      
+  imprimir-datos:
+    runs-on: ubuntu-latest
+    steps:
+      # Usando variables integradas en los nombres de los pasos
+      - name: Saludo al desarrollador ${{ github.actor }}
+        run: |
+          echo "Hola ${{ github.actor }}, estás trabajando en la rama ${{ github.ref_name }}"
+
+      # Condicional inteligente usando variables
+      - name: Solo se ejecuta si estamos en la rama principal
+        if: github.ref_name == 'main'
+        run: echo "¡Alerta! Ejecutando un cambio crítico en la rama principal."
